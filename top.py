@@ -9,8 +9,7 @@ os.chdir("img")
 for num in range(0,10):
     page=str(num*25)
     # request = requests.Session()
-    # request.proxies = .... 反爬虫,代理
-    
+    # request.proxies = .... 反爬虫,代理   
     r=requests.get(base_url+page+'&filter=',headers=headers)
     content = r.text
     soup = BeautifulSoup(r.text, 'lxml')
