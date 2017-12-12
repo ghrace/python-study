@@ -19,23 +19,3 @@ for num in range(0,10):
         photo=requests.get(src)
         with open(title+".jpg", "wb") as f:
             f.write(photo.content)
-
-# for num in range(0,10):
-#     page=str(num)
-#     r = requests.get(base_url+'-'+page, headers = headers) #这里对网址进行一个修改
-#     content = r.text
-#     # print(content)
-#     soup = BeautifulSoup(r.text, 'lxml')
-#     divs=soup.find_all('img')
-#     print(divs)
-#     for div in divs:
-#
-#         img=div.get('src')
-#         print(img)
-#         title=joke.get('alt')
-#         photo=requests.get(img)
-#
-#         with open(title+".jpg", "wb") as f:
-#             f.write(photo.content)
-#
-#         # print('------')
