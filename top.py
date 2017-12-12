@@ -13,10 +13,10 @@ for num in range(0,10):
     r=requests.get(base_url+page+'&filter=',headers=headers)
     content = r.text
     soup = BeautifulSoup(r.text, 'lxml')
-    divs=soup.find_all('img')
-    for div in divs:
-        title=div.get('alt')
-        src=div.get('src')
+    imgs=soup.find_all('img')
+    for img in imgs:
+        title=img.get('alt')
+        src=img.get('src')
         print(src)
         photo=requests.get(src)
         with open(title+".jpg", "wb") as f:
