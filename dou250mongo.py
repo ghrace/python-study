@@ -28,11 +28,11 @@ for num in range(0,10):
         if quote:
             quote=quote.get_text()
         my_set.insert({"title":title,"quote":quote})
-    # imgs=soup.find_all('img')
-    # for img in imgs:
-    #     title=img.get('alt')
-    #     src=img.get('src')
-    #     print(src)
-    #     photo=requests.get(src)
-    #     with open(title+".jpg", "wb") as f:
-    #         f.write(photo.content)
+    imgs=soup.find_all('img')
+    for img in imgs:
+        title=img.get('alt')
+        src=img.get('src')
+        print(src)
+        photo=requests.get(src)
+        with open(title+".jpg", "wb") as f:
+            f.write(photo.content)
