@@ -27,7 +27,7 @@ for num in range(0,10):
         quote=item.find('p',class_='quote')
         if quote:
             quote=quote.get_text()
-        my_set.insert({"title":title,"quote":quote})
+            my_set.insert({"title":title,"quote":quote})
     imgs=soup.find_all('img')
     for img in imgs:
         title=img.get('alt')
