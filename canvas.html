@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas></canvas>
+    <script>
+        let t = 0;
+        const cs = document.querySelector('canvas')
+        let canvas = cs.getContext('2d');
+
+        cs.width = window.innerWidth;
+        cs.height = window.innerHeight;
+        window.addEventListener('resize', function () {
+            cs.width = window.innerWidth;
+            cs.height = window.innerHeight;
+        }, false)
+
+        function draw() {
+            canvas.globalCompositeOperation = 'source-over';
+            // color
+            // hsla 色相(h),饱和度(s),明度(L),alpha 透明度,1-0(不透明-透明)
+            canvas.fillStyle = 'hsla(0,0%,0%,.1)';
+            canvas.fillRect(0, 0, cs.width, cs.height);
+            let ds, i, r;
+            ds = Math.cos(t) * 2 * Math.PI;
+            for (i = 0; i < 400; ++i) {
+                r = 400 * Math.sin(i * ds);
+                canvas.globalCompositeOperation = 'source-over';
+                canvas.fillStyle = 'hsla(' + i + 10 + ',80%,40%,1)';
+                canvas.beginPath();
+                canvas.arc(Math.sin(i) * r + (cs.width / 2),
+                    Math.cos(i) * r + (cs.height / 2), 1.5, 0, Math.PI * 2
+                );
+                canvas.fill();
+            }
+            // 圆半径的变量,相当于每一帧
+            t += 0.0002;
+            return t % 2 * Math.PI;
+        }
+
+        function start() {
+            window.requestAnimationFrame(start);
+            draw()
+        }
+        start()
+    </script>
+</body>
+
+</html>
