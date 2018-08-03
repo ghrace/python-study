@@ -1,1 +1,1 @@
-# python-study
+# python and js
