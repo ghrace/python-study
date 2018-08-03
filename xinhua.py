@@ -4,7 +4,8 @@ from prettyprinter import cpprint
 # 新华字典库
 url='https://www.pwxcoo.com/dictionary'
 #歇后语 riddle 语面
-params={'type':'xiehouyu','riddle':'唐僧'}
+key=input('输入关键字:')
+params={'type':'xiehouyu','riddle':key}
 # 成语
 # params={'type':'idiom','riddle':'兴高采烈'}
 #  拼音缩写
