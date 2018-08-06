@@ -24,7 +24,10 @@ function cutString(str, len, suffix) {
     }
     return str;
   }
-  
+  // 千分位
+  function numberWithCommas (x = 0) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  }
   /**
  * 判断微信浏览器
  * @returns {Boolean}
