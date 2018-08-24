@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="width: 100%;height: 100%;">
+        <input type="tel" style="width: 100%; height: 50px;border: 1px solid #ccc;" id="inputt" autofocus="autofocus"></input>
+    </div>
+</body>
+<script type="text/javascript">
+    document.getElementById("box").onclick = function(){
+        document.getElementById("inputt").focus();
+    }
+</script>
+</html>
