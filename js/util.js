@@ -395,3 +395,7 @@ const debounce = (fn, wait = 500) => {
     fn.timer = setTimeout(fn.bind(this, ...arguments), wait)
   }
 }
+//void 运算符通常只用于获取 undefined的原始值，一般使用void(0)（等同于void 0）
+function isUndefined(obj) {
+  return obj === void 0;
+}
