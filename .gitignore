@@ -9,4 +9,4 @@ package-lock.json
 /js/imgs/
 qb.txt
 node_modules/
-__pycache__
+/__pycache__/
