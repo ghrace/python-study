@@ -399,3 +399,38 @@ const debounce = (fn, wait = 500) => {
 function isUndefined(obj) {
   return obj === void 0;
 }
+
+//防抖（debounce）：空闲时间必须大于或等于一定值的时候，只会调用一,才会执行调用方法
+function debounce(fn, delay) {
+  var timer; // 定时器
+  delay || (delay = 250); // 默认空闲时间250ms
+  return function() {
+      var context = this;
+      var args = arguments;
+      clearTimeout(timer); // 清除定时器
+      timer = setTimeout(function() { // delay时间后，执行函数
+          fn.apply(context, args);
+      }, delay);
+  };
+}
+//节流（throttle）：连续执行函数，每隔一定时间执行函数
+function throttle(fn, delay) {
+  var last; // 上次执行的时间
+  var timer; // 定时器
+  delay || (delay = 250); // 默认间隔为250ms
+  return function() {
+      var context = this;
+      var args = arguments;
+      var now = +new Date(); // 现在的时间
+      if (last && now < last + delay) { // 当前距离上次执行的时间小于设置的时间间隔
+          clearTimeout(timer); // 清除定时器
+          timer = setTimeout(function() { // delay时间后，执行函数
+              last = now;
+              fn.apply(context, args);
+          }, delay);
+      } else { // 当前距离上次执行的时间大于等于设置的时间，直接执行函数
+          last = now;
+          fn.apply(context, args);
+      }
+  };
+}
