@@ -1,5 +1,17 @@
-function sayHe(person:string){
-    return 'hello' +person
+// function sayHe(person:string){
+//     return 'hello' +person
+// }
+// let user='tom'
+// console.log(sayHe(user))
+
+class Animal{
+    constructor(name){
+        this.name=name;
+    }
+    sayHi(){
+        return `my name is ${this.name}`
+    }
 }
-let user='tom'
-console.log(sayHe(user))
+
+let a=new Animal('tom')
+console.log(a.sayHi())

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function socketConnect(url){
+        let ws=new WebSocket(url);
+        ws.onopen=e=>{
+            console.log('连接成功',e);
+            ws.send('send message to server')
+        }
+        ws.onmessage=e=>{
+            console.log('服务器返回:',e.data);
+        }
+        return ws;
+
+    }
+    let wsValue=socketConnect('ws://121.40.165.18:8800')
+    </script>
+</body>
+</html>
