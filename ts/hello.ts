@@ -16,8 +16,12 @@
 // let a=new Animal('tom')
 // console.log(a.sayHi())
 
-enum Days{Sun,Mon,Tue,Wed,Thu,Fri,Sat}
-console.log(Days['Sun']===0)
+interface Person {
+    name:string;
+    age:number;
+}
 
-let arr:[string,number]=['abc',234]
-
+let tom: Person={
+    name:'te',
+    age:23
+}
