@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>tf</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      margin-left: 200px;
+      margin-top: 100px;
+      color: #FFF;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 300px;
+      background: #000;
+    }
+
+    .content p {
+      display: inline-block;
+    }
+
+    .content p.padding {
+      padding-right: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="content">
+      <p class="text">1.文字如果超出了宽度自动向左滚动文字如果超出了宽度自动向左滚动。</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"></script>
+  <script>
+    // Notice there is no 'import' statement. 'tf' is available on the index-page
+    // because of the script tag above.
+
+    // Define a model for linear regression.
+    const model = tf.sequential();
+    model.add(tf.layers.dense({
+      units: 1,
+      inputShape: [1]
+    }));
+
+    // Prepare the model for training: Specify the loss and the optimizer.
+    model.compile({
+      loss: 'meanSquaredError',
+      optimizer: 'sgd'
+    });
+
+    // Generate some synthetic data for training.
+    const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
+    const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
+
+    // Train the model using the data.
+    model.fit(xs, ys, {
+      epochs: 10
+    }).then(() => {
+      // Use the model to do inference on a data point the model hasn't seen before:
+      // Open the browser devtools to see the output
+      model.predict(tf.tensor2d([5], [1, 1])).print();
+    });
+
+    // const shape=[2,3]
+    // const a=tf.tensor([1,2,3,10,20,30],shape)
+    // a.print()
+    // const c=tf.tensor2d([[1,2,3],[2,5,6]]);
+    // c.print()
+    // const zeros=tf.zeros([4,4])
+    // zeros.print()
+    // const initialVal=tf.zeros([5]);
+    // const biases=tf.variable(initialVal);
+    // const updateVal=tf.tensor1d([2,4,6,7,2]);
+    // biases.assign(updateVal);
+    // biases.print()
+
+    const a = tf.scalar(2);
+    const b = tf.scalar(4);
+    const c = tf.scalar(8);
+
+    function predict(input) {
+      // y = a * x ^ 2 + b * x + c
+      return tf.tidy(() => {
+        const x = tf.scalar(input);
+        const ax2 = a.mul(x.square());
+        const bx = b.mul(x);
+        const y = ax2.add(bx).add(c)
+        return y;
+      })
+    }
+    const result = predict(2);
+    result.print()
+    // const model=tf.sequential();
+    // model.add(
+    //     tf.layers.simpleRNN({
+    //         units:20,
+    //         recurrentInitializer:'GlorotNormal',
+    //         inputShape:[80,4]
+    //     })
+    // )
+    // const optimizer=tf.train.sgn(LEARNING_RATE);
+    // model.compile({optimizer,loss:'categoricalCrossentropy'});
+    // model.fit({x:data,y:labels})
+    let [box, content, text] = [
+      document.querySelector('.box'),
+      document.querySelector('.content'),
+      document.querySelector('.text')
+    ]
+    let [textWidth, boxWidth] = [
+      text.offsetWidth,
+      box.offsetWidth
+    ]
+    console.log(textWidth, boxWidth);
+    window.onload = function checkScrollLeft() {
+      // 判断文字长度是否大于盒子长度
+      if (boxWidth >= textWidth) {
+        return false
+      }
+      content.innerHTML += content.innerHTML
+      document.querySelector('.text').classList.add('padding')
+      // 更新
+      textWidth = document.querySelector('.text').offsetWidth
+      // 开始滚动  触发事件
+      toScrollLeft()
+    }
+
+    function toScrollLeft() {
+      //  如果文字长度大于滚动条距离，则递归拖动
+      if (textWidth > box.scrollLeft) {
+        box.scrollLeft++
+        setTimeout('toScrollLeft()', 18);
+      } else {
+        // 滚动结束 触发事件
+        // setTimeout("fun2()",2000);
+        setTimeout(() => {
+
+        })
+      }
+    }
+  </script>
+</body>
+
+</html>

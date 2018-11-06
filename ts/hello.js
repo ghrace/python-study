@@ -7,3 +7,4 @@ var tom = {
     name: 'te',
     age: 23
 };
+var AGE = 23;

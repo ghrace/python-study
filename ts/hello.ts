@@ -25,3 +25,5 @@ let tom: Person={
     name:'te',
     age:23
 }
+
+const AGE=23
