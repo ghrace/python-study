@@ -26,4 +26,19 @@ const pluckDeep = path => obj =>
 
 pluckDeep("a.b.c")(deepAttr);
 
-//
+/**
+ * 
+ * @param {array} arr 
+ * @param {number} n 偏移量
+ * @return 偏移的数组
+ */
+
+function moveElement(arr, n) {
+  if(Math.abs(n)>arr.length) n = n%arr.length
+  return arr.slice(-n).concat(arr.slice(0,-n))
+}
+let arr=[1,3,4,6,7]
+console.log(moveElement(arr,3));
+
+const move=(arr, n)=>(n=n%arr.length,[...arr.slice(-n), ...arr.slice(0,-n)])
+console.log(move(arr,6));

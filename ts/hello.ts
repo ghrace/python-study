@@ -27,3 +27,10 @@ let tom: Person={
 }
 
 const AGE=23
+
+class Animal{
+    private name;
+   public constructor(name){
+       this.name=name
+   }
+}
