@@ -16,21 +16,41 @@
 // let a=new Animal('tom')
 // console.log(a.sayHi())
 
+// interface Person {
+//     name:string;
+//     age:number;
+// }
+
+// let tom: Person={
+//     name:'te',
+//     age:23
+// }
+
+// const AGE=23
+
+// class Animal{
+//     private name;
+//    public constructor(name){
+//        this.name=name
+//    }
+// }
+
+class Student {
+    fullName: string;
+    constructor(public firstName, public middleInitial, public lastName) {
+        this.fullName = firstName + ' ' + middleInitial + ' ' + lastName
+    }
+}
+const enum Directions {
+    UP, DOWN, LEFT, RIGHT
+}
+console.log(Directions.DOWN)
 interface Person {
-    name:string;
-    age:number;
+    firstName: string;
+    lastName: string;
 }
-
-let tom: Person={
-    name:'te',
-    age:23
+function greeter(person: Person) {
+    return 'hello,' + person.firstName + ' ' + person.lastName
 }
-
-const AGE=23
-
-class Animal{
-    private name;
-   public constructor(name){
-       this.name=name
-   }
-}
+let user = new Student('jack', 'M.', 'john')
+console.log(greeter(user))
