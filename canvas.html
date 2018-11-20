@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>canvas</title>
 </head>
+
 <body>
     <canvas></canvas>
     <script>
@@ -17,6 +19,7 @@
             cs.width = window.innerWidth;
             cs.height = window.innerHeight;
         }, false)
+
         function draw() {
             // canvas.globalCompositeOperation = 'source-over';
             // hsla 色相(h),饱和度(s),明度(L),alpha 透明度,1-0(不透明-透明)
@@ -29,17 +32,24 @@
                 // canvas.globalCompositeOperation = 'source-over';
                 canvas.fillStyle = 'hsla(' + i + 10 + ',80%,40%,1)';
                 canvas.beginPath();
+                /**
+                ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+                x和y参数是圆心坐标，radius是半径，startAngle和endAngle则是扇形的起始角度和终止角度（以弧度表示）
+                anticlockwise表示做图时应该逆时针画（true）还是顺时针画（false
+                */
                 canvas.arc(Math.sin(i) * r + (cs.width / 2),
                     Math.cos(i) * r + (cs.height / 2), 1.5, 0, Math.PI * 2
                 );
                 canvas.fill();
             }
             // 圆半径的变量,相当于每一帧
-            t += 0.0002;
-            let result=t % 2 * Math.PI
-            console.log(result);
+            t += 0.0001;
+            let result = t % 2 * Math.PI
+            // console.log(result);
+            console.log(t);
             return result
         }
+
         function start() {
             window.requestAnimationFrame(start);
             draw()
