@@ -1,4 +1,4 @@
-# python and js practice
+# front-end learn & python 
 
-一些python基础和爬虫,以及js的问题练习
+一些前端学习demo,以及python,ts
 

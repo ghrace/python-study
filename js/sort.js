@@ -6,57 +6,57 @@ function computeMaxCallStackSize() {
         return 1;
     }
 }
-let result=computeMaxCallStackSize()
+let result = computeMaxCallStackSize()
 console.log(result);
 
-let count = 0 
+let count = 0
 // 位置交换函数
- const change = function (arr, n1, n2) {
-      // 用es6的实现交换
-      [arr[n1], arr[n2]] = [arr[n2], arr[n1]]
-     //let temp = arr[n1]
-     //arr[n1] = arr[n2]
-     //arr[n2] = temp
- }
- // 冒泡排序
- /**
-  * 从第一个元素开始，把当前元素和下一个索引元素进行比较。如果当前元素大，那么就交换位置，
-  * 重复操作直到比较到最后一个元素，那么此时最后一个元素就是该数组中最大的数。
-  * 下一轮重复以上操作，但是此时最后一个元素已经是最大数了，所以不需要再比较最后一个元素，只需要比较到 length - 1 的位置
-  * @param {Array} soucre 
-  * @return {Array}
-  */
- const bubbleSort = function (soucre) {
-     let len = soucre.length
-     for (let i = 0;i < len - 1; i++) {
-         for (let j = 0; j < len - 1 - i;j++) {
-             count ++
-             if (soucre[j] > soucre[j+1]) {
-                change(soucre, j, j+1)
-             }
-         }
-     }
-     return soucre
- }
- //选择排序
- /**
-  * 遍历数组，设置最小值的索引为 0，如果取出的值比当前最小值小，就替换最小值索引，遍历完成后，
-  * 将第一个元素和最小值索引上的值交换。如上操作后，第一个元素就是数组中的最小值，下次遍历就可以从索引 1 开始重复上述操作。
-  * @param {*} soucre 
-  */
- const selectSort = function (soucre) {
+const change = function (arr, n1, n2) {
+    // 用es6的实现交换
+    [arr[n1], arr[n2]] = [arr[n2], arr[n1]]
+    //let temp = arr[n1]
+    //arr[n1] = arr[n2]
+    //arr[n2] = temp
+}
+// 冒泡排序
+/**
+ * 从第一个元素开始，把当前元素和下一个索引元素进行比较。如果当前元素大，那么就交换位置，
+ * 重复操作直到比较到最后一个元素，那么此时最后一个元素就是该数组中最大的数。
+ * 下一轮重复以上操作，但是此时最后一个元素已经是最大数了，所以不需要再比较最后一个元素，只需要比较到 length - 1 的位置
+ * @param {Array} soucre 
+ * @return {Array}
+ */
+const bubbleSort = function (soucre) {
+    let len = soucre.length
+    for (let i = 0; i < len - 1; i++) {
+        for (let j = 0; j < len - 1 - i; j++) {
+            count++
+            if (soucre[j] > soucre[j + 1]) {
+                change(soucre, j, j + 1)
+            }
+        }
+    }
+    return soucre
+}
+//选择排序
+/**
+ * 遍历数组，设置最小值的索引为 0，如果取出的值比当前最小值小，就替换最小值索引，遍历完成后，
+ * 将第一个元素和最小值索引上的值交换。如上操作后，第一个元素就是数组中的最小值，下次遍历就可以从索引 1 开始重复上述操作。
+ * @param {*} soucre 
+ */
+const selectSort = function (soucre) {
     let len = soucre.length
     let minidx;
-    for (let i = 0; i < len; i ++) {
+    for (let i = 0; i < len; i++) {
         minidx = i
         for (let j = i + 1; j < len; j++) {
-            count ++
+            count++
             if (soucre[minidx] > soucre[j]) {
                 minidx = j
             }
         }
         if (minidx !== i) {
-            change(soucre,i,minidx)
+            change(soucre, i, minidx)
         }
     }
     return soucre
@@ -75,10 +75,10 @@ const insertSort = function (source) {
     for (i = 0; i < len; i++) {
         value = source[i]
         // 已排序部分进行元素的右移一位，并把目标值value插入到对应的位置
-        for (j = i -1 ;j > -1 && source[j] > value; j--) {
-            source[j+1] = source[j]
+        for (j = i - 1; j > -1 && source[j] > value; j--) {
+            source[j + 1] = source[j]
         }
-        source[j+1] = value
+        source[j + 1] = value
     }
     return source
 }
@@ -96,11 +96,12 @@ const mergeSort = function mergeSort(source) {
     if (len < 2) {
         return source
     }
-    let mid = Math.floor(len/2)
-    let left = source.slice(0,mid)
+    let mid = Math.floor(len / 2)
+    let left = source.slice(0, mid)
     let right = source.slice(mid)
     return merge(mergeSort(left), mergeSort(right))
 }
+
 function merge(left, right) {
     let result = []
     while (left.length && right.length) {
@@ -110,10 +111,10 @@ function merge(left, right) {
             result.push(right.shift())
         }
     }
-    while (left.length){
+    while (left.length) {
         result.push(left.shift())
     }
-    while (right.length){
+    while (right.length) {
         result.push(right.shift())
     }
     return result
@@ -128,40 +129,40 @@ const change = function (arr, n1, n2) {
     //        let temp = arr[n1]
     //        arr[n1] = arr[n2]
     //        arr[n2] = temp
-      // 用es6的实现交换
-      [arr[n1], arr[n2]] = [arr[n2], arr[n1]]
-  }
+    // 用es6的实现交换
+    [arr[n1], arr[n2]] = [arr[n2], arr[n1]]
+}
 const quiregai = function quiregai(source, start, end) {
-     let pivot = source[Math.floor((start + end)/2)]
-     let i = start // 左边指针初始位置
-     let j = end // 右边指针初始位置
-     while(i<=j) {
-         while (source[i] < pivot) {
-             i ++ // 左指针右移
-         }
-         while (source[j] > pivot) {
-             j -- // 右指针左移
-         }
-         if (i <= j){
-             change(source,i,j) // 交换两个位置的值
-             i++
-             j--
-         }
-     }
-     return i // 返回一轮循环后左指针的位置，为下一轮循环初始位置确定
-  }
-  const quiregaiSort = function quiregaiSort(source, start, end) {
-      if (source.length < 2) return source
-      var start = start || 0
-      var end = end || source.length - 1
-      var nextStart = quiregai(source, start, end)
-//        debugger
-      if (start < nextStart -1) {
-          quiregaiSort(source, start, nextStart -1 ) // 上个循环结束的左指针作为左边区块循环的右指针
-      }
-      if (nextStart < end) {
-          quiregaiSort(source, nextStart, end) // 上个循环结束的左指针作为右边区块循环的左指针
-      }
-      return source
-  }
-  
+    let pivot = source[Math.floor((start + end) / 2)]
+    let i = start // 左边指针初始位置
+    let j = end // 右边指针初始位置
+    while (i <= j) {
+        while (source[i] < pivot) {
+            i++ // 左指针右移
+        }
+        while (source[j] > pivot) {
+            j-- // 右指针左移
+        }
+        if (i <= j) {
+            change(source, i, j) // 交换两个位置的值
+            i++
+            j--
+        }
+    }
+    return i // 返回一轮循环后左指针的位置，为下一轮循环初始位置确定
+}
+const quiregaiSort = function quiregaiSort(source, start, end) {
+    if (source.length < 2) return source
+    var start = start || 0
+    var end = end || source.length - 1
+    var nextStart = quiregai(source, start, end)
+    //        debugger
+    if (start < nextStart - 1) {
+        quiregaiSort(source, start, nextStart - 1) // 上个循环结束的左指针作为左边区块循环的右指针
+    }
+    if (nextStart < end) {
+        quiregaiSort(source, nextStart, end) // 上个循环结束的左指针作为右边区块循环的左指针
+    }
+    return source
+}
+//JS 数组长度大于 10 采用快排，否则插入排序
