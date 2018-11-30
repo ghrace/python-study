@@ -14,7 +14,7 @@ function createRandom(num, from, to) {
     arr.length = num;
     return arr;
 }
-const arr = createRandom(100000, 0, 10000)
+const arr = createRandom(10000, 0, 10000)
 
 function checkArray(arr) {
     if (!arr || arr.length <= 2) return
