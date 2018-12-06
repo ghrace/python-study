@@ -217,6 +217,30 @@ console.time('origin')
 const origin = arr.sort((a, b) => a - b)
 console.timeEnd('origin')
 
+//希尔排序
+function shellSort(arr){
+    let len=arr.length
+    let temp
+    let gap=1
+    while(gap<len/3){
+        gap=gap*3+1
+    }
+    for(gap;gap>0;gap=Math.floor(gap/3)){
+        for(let i=gap;i<len;i++){
+            temp=arr[i]
+            let j=i-gap
+            for(j;i>=0&&arr[j]>temp;j-=gap){
+                arr[j+gap]=arr[j]
+            }
+            arr[j+gap]=temp
+        }
+    }
+    return arr
+}
+console.time('shell')
+const shell = shellSort(arr)
+console.timeEnd('shell')
+
 check(qui)
 check(gui)
 check(bub)
@@ -224,6 +248,8 @@ check(sel)
 check(ins)
 check(dui)
 check(origin)
+check(shell)
+
 
 function check(arr) {
     for (let i = 0, len = arr.length - 1; i < len; i++) {
