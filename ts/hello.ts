@@ -3,7 +3,6 @@
 // }
 // let user='tom'
 // console.log(sayHe(user))
-
 // class Animal{
 //     constructor(name){
 //         this.name=name;
@@ -40,7 +39,8 @@ interface Person {
   lastName: string
 }
 function greeter(person: Person) {
-  return 'hello,' + person.firstName + ' ' + person.lastName
+    return 'hello,' + person.firstName + ' ' + person.lastName
 }
 let user = new Student('jack', 'M.', 'john')
+let b:string='ss'
 console.log(greeter(user))

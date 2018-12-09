@@ -31,4 +31,5 @@ function greeter(person) {
     return 'hello,' + person.firstName + ' ' + person.lastName;
 }
 let user = new Student('jack', 'M.', 'john');
+let b = 'ss';
 console.log(greeter(user));
