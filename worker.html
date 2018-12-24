@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 主线程
+      const worker = new Worker('worker.js')
+      worker.postMessage([10, 24])
+      worker.onmessage = function(e) {
+        console.log(e.data)
+      }
+
+      // Worker 线程
+      onmessage = function(e) {
+        if (e.data.length > 1) {
+          postMessage(e.data[1] - e.data[0])
+        }
+      }
+    </script>
+  </body>
+</html>
