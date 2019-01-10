@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function b() {
+        console.log('1')
+      }
+
+      async function c() {
+        console.log('7')
+      }
+
+      async function a() {
+        console.log('2')
+        await b()
+        //console.log(3);
+        await c()
+        console.log(8)
+      }
+
+      a()
+      console.log(5)
+      Promise.resolve()
+        .then(() => {
+          console.log(4)
+        })
+        .then(() => {
+          console.log(6)
+        })
+
+p1
+123
+456
+55
+p
+      new Promise(resolve => {
+        setTimeout(() => resolve(), 1000)
+      }).then(() => console.log(55555555))
+
+      setTimeout(() => {
+        console.log(123)
+      })
+    </script>
+  </body>
+</html>
