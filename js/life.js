@@ -8,21 +8,21 @@ const human = {
     rich: {
         level: 1,
         wealth: 1,
-        num: 100,
+        num: 10,
         sex: null,
         married: false
     },
     middle: {
         level: 0,
         wealth: 0,
-        num: 1000,
+        num: 100,
         sex: null,
         married: false
     },
     poor: {
         level: -1,
         wealth: -1,
-        num: 10000,
+        num: 1000,
         sex: null,
         married: false
     }
@@ -34,7 +34,8 @@ function init() {
     let humanArr = []
     // 富人数组
     for (let i = 0; i < human.rich.num; i++) {
-        let rich = { ...human.rich
+        let rich = {
+            ...human.rich
         }
         if (i < human.rich.num / 2) {
             rich.sex = 0 // 男性
@@ -45,7 +46,8 @@ function init() {
     }
     // 中人数组
     for (let i = 0; i < human.middle.num; i++) {
-        let middle = { ...human.middle
+        let middle = {
+            ...human.middle
         }
         if (i < human.middle.num / 2) {
             middle.sex = 0
@@ -56,7 +58,8 @@ function init() {
     }
     // 穷人数组
     for (let i = 0; i < human.poor.num; i++) {
-        let poor = { ...human.poor
+        let poor = {
+            ...human.poor
         }
         if (i < human.poor.num / 2) {
             poor.sex = 0

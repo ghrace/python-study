@@ -4,6 +4,9 @@ function readonly(target,name,descriptor){
 }
 
 class MyClass {
+    constructor(){
+
+    }
     
     @readonly
     method(){

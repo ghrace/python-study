@@ -1,4 +1,3 @@
-"use strict";
 // function sayHe(person:string){
 //     return 'hello' +person
 // }
@@ -12,24 +11,26 @@
 //         return `my name is ${this.name}`
 //     }
 // }
-class Animal {
-    constructor(name) {
+var Animal = /** @class */ (function () {
+    function Animal(name) {
         this.name = name;
     }
-}
-let a = new Animal('tom');
-class Student {
-    constructor(firstName, middleInitial, lastName) {
+    return Animal;
+}());
+var a = new Animal('tom');
+var Student = /** @class */ (function () {
+    function Student(firstName, middleInitial, lastName) {
         this.firstName = firstName;
         this.middleInitial = middleInitial;
         this.lastName = lastName;
         this.fullName = firstName + ' ' + middleInitial + ' ' + lastName;
     }
-}
+    return Student;
+}());
 console.log(1 /* DOWN */);
 function greeter(person) {
     return 'hello,' + person.firstName + ' ' + person.lastName;
 }
-let user = new Student('jack', 'M.', 'john');
-let b = 'ss';
+var user = new Student('jack', 'M.', 'john');
+var b = 'ss';
 console.log(greeter(user));
