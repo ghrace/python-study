@@ -1,3 +1,4 @@
+// 去重
 function unique(origin) {
     var result = [];
     for(var i = 0; i < origin.length; i++) {
