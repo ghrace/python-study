@@ -4,10 +4,13 @@
         "start": "nodemon app.js"
     },
     "dependencies": {
+        "axios": "^0.18.0",
+        "compression": "^1.7.4",
         "express": "^4.16.4",
-        "ghr-util": "^1.0.1",
+        "ghr-util": "^1.0.5",
         "lodash": "^4.17.11",
         "mongoose": "^5.2.18",
-        "socket.io": "^2.1.1"
+        "socket.io": "^2.2.0",
+        "ws": "^7.0.0"
     }
 }
