@@ -23,6 +23,32 @@
         .container div:nth-of-type(3) {
         background: #00f;
         }
+    :root {
+      --error-color: red;
+    }
+    .form > input {
+      margin-bottom: 10px;
+    }
+    .form > .f-tips {
+      color: var(--error-color);
+      display: none;
+    }
+    input[type="text"]:invalid ~ input[type="submit"],
+    input[type="password"]:invalid ~ input[type="submit"] {
+      display: none;
+    }
+    input[required]:focus:invalid + span {
+      display: inline;
+    }
+    input[required]:empty + span {
+      display: none;
+    }
+    input[required]:invalid:not(:placeholder-shown) + span {
+      display: inline;
+    }
+
+
+
 
     </style>
 </head>
@@ -33,5 +59,17 @@
         </div>
         <div class="r">右边</div>
     </div>
+    <form class="form" id="form" method="get" action="/api/form">
+        账号：
+        <input data-title="账号" placeholder="请输入正确的账号" pattern="\w{6,10}" name="account" type="text" required />
+        <span class="f-tips">请输入正确的账号</span>
+    
+        密码：
+        <input data-title="密码" placeholder="请输入正确的密码" pattern="\w{6,10}" name="password" type="password" required />
+        <span class="f-tips">请输入正确的密码</span>
+    
+        <input name="button" type="submit" value="提交" />
+      </form>
+    
 </body>
 </html>
