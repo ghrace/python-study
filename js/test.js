@@ -50,7 +50,6 @@ function pigIt(str){
   return final.join(' ')
 }
 
-
 function pigIt1(str){
     // return str.replace(/\w+/g, (w) => {
     //     return w.slice(1) + w[0] + 'ay';
@@ -75,7 +74,7 @@ class Dog extends Animal{
         super(...args)
         this.sex=sex
     }
-    
+
     walk(){
         super.walk()
         console.log('dog walk');
@@ -84,4 +83,12 @@ class Dog extends Animal{
 
 const dog=new Dog('male','pet',22)
 dog.walk()
-console.log(dog.type,dog.sex);
+
+let old = [{ id: 1 }, { id: 2 },{id:4}]
+let newarr = [{ id: 1 }, { id: 3 },{id:5}]
+
+let add = newarr.filter(item => old.filter(v => v.id == item.id).length == 0)
+let del=old.filter(item => newarr.filter(v => v.id == item.id).length == 0)
+console.log(add)
+
+console.log('del',del)
