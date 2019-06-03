@@ -184,7 +184,7 @@ function isURL(str_url) {
   return re.test(str_url);
 }
 // 建议的正则
-functionisURL(str) {
+function isURL(str) {
   return !!str.match(/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g);
 }
 
