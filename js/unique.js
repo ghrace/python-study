@@ -112,3 +112,55 @@ function unique(origin){
     const map = new Map()
     return origin.filter((item) => !map.has(item) && map.set(item, true))
 }
+
+
+function unique(arr,u_key){
+    let obj = {}
+    arr.reduce((prev,next)=>{
+      obj[next[u_key]+typeof next[u_key]] ?  '' :
+      obj[next[u_key]+typeof next[u_key]] = true && prev.push(next)
+      return prev 
+    },[])
+  }
+
+  function unique(arr,u_key){
+    let result = []
+    result[0] = arr[0]
+    arr.forEach((meta_item,i)=>{
+      //声明计数变量，如果源数组中的一个对象和result结果数组中的所有对象不同，就push
+      let num = 0
+      result.forEach((r_item,j)=>{
+        if (meta_item[u_key]!==r_item[u_key]) {
+          num++
+        }
+        if (num === result.length) {
+          result.push(meta_item)
+        }
+      })
+    })
+    return result
+  }
+
+  function unique(arr,u_key) {
+    let obj = {}
+    let result = []
+    arr.forEach(item=>{
+      let typeof_key = typeof item[u_key] + item[u_key]
+      obj[typeof_key] = item
+    })
+    for (let key in obj) {
+      result.push(obj[key])
+    }
+    return result
+  }
+
+  function unique(arr,u_key) {
+    let map = new Map()
+    arr.forEach((item,index)=>{
+      if (!map.has(item[u_key])){
+        map.set(item[u_key],item)
+      }
+    })
+    return [...map.values()]
+  }
+  

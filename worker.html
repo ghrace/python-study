@@ -1,26 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      // 主线程
-      const worker = new Worker('worker.js')
-      worker.postMessage([10, 24])
-      worker.onmessage = function(e) {
-        console.log(e.data)
-      }
-      
-      // Worker 线程
-      onmessage = function(e) {
-        if (e.data.length > 1) {
-          postMessage(e.data[1] - e.data[0])
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    let tree='[{"children":[{"children":[{"children":[{"iconCls":"tree-leaf","id":"11135851","menumodeltype":"0","nodeType":"menu2","openMode":"new","openType":"2","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/jcj/managerPage.html","text":"接处警管理"},{"iconCls":"tree-leaf","id":"11140021","menumodeltype":"0","nodeType":"menu2","openMode":"new","openType":"2","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/jcj/zhQueryPage.html","text":"接处警查询"},{"iconCls":"tree-leaf","id":"11140621","menumodeltype":"0","nodeType":"menu2","openMode":"new","openType":"2","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/test/processDefinition/managerPage","text":"接处警流程配置"},{"iconCls":"tree-leaf","id":"11140622","menumodeltype":"0","nodeType":"menu2","openMode":"new","openType":"2","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/zspz/modelgl.html","text":"接处警配置"},{"iconCls":"tree-leaf","id":"11151301","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/jcj/jzjjsa/jzjjsaManage.html","text":"经侦接警管理"},{"iconCls":"tree-leaf","id":"11279273","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/jcj/jqzhipaigl_page.html","text":"警情指派"},{"iconCls":"tree-leaf","id":"112892308","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://jcj.jwzh.online:9019/jwzh-jcj/jcj/jqjdQueryPage.html","text":"警情处置监督"}],"iconCls":"tree-org","id":"11135850","menumodeltype":"0","nodeType":"menu1","openType":"","openURL":"","state":"closed","text":"接处警"},{"children":[{"iconCls":"tree-leaf","id":"112908237","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://syrk.jwzh.online:9013/jwzh-syrk/syrk/managerPage","text":"实有人口管理"},{"iconCls":"tree-leaf","id":"112908238","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://syrk.jwzh.online:9013/jwzh-syrk/ldrk/managerPage","text":"流动人口管理"}],"iconCls":"tree-org","id":"112908236","menumodeltype":"0","nodeType":"menu1","openType":"","openURL":"","state":"closed","text":"实有人口"},{"children":[{"iconCls":"tree-leaf","id":"112908240","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://anjian.jwzh.online:9022/jwzh-anjian/html/xsaj/xsajManage.html","text":"刑事案件个人工作台"}],"iconCls":"tree-org","id":"112908239","menumodeltype":"0","nodeType":"menu1","openType":"","openURL":"","state":"closed","text":"刑事案件"},{"children":[{"iconCls":"tree-leaf","id":"112908278","menumodeltype":"2","nodeType":"menu2","openType":"1","openURL":"http://www.baidu.com","text":"百度"},{"iconCls":"tree-leaf","id":"112908302","menumodeltype":"2","nodeType":"menu2","openType":"3","openURL":"http://www.guizhou.gov.cn/","text":"贵州省人民政府"}],"iconCls":"tree-org","id":"112908277","menumodeltype":"0","nodeType":"menu1","openType":"","openURL":"","state":"closed","text":"友情链接"},{"children":[{"iconCls":"tree-leaf","id":"112908313","menumodeltype":"0","nodeType":"menu2","openType":"1","openURL":"http://www.baidu.com","text":"实有房屋管理"}],"iconCls":"tree-org","id":"112908312","menumodeltype":"0","nodeType":"menu1","openType":"","openURL":"","state":"closed","text":"实有房屋"}],"iconCls":"icon-favorite","id":"11117913","nodeType":"system","state":"closed","text":"警务综合系统"}],"iconCls":"icon-treeroot1","id":"ROOT","nodeType":"ROOT","text":"系统菜单"}]'
+    tree=JSON.parse(tree)
+    console.log(tree)
+    function findFatherId(id, item,ids){
+        if(item == null || !item.children){
+            return item;
         }
-      }
-    </script>
-  </body>
+        var children = item.children;
+        var resArray = [];
+        for(var ob of children){
+            var sub = ob;
+            if(sub.children){
+                var rs = findFatherId(id, sub,ids);
+                if(rs != null){
+                    resArray.push(rs);
+                    ids.push(rs.id);
+                }
+            }else{
+                var subId = sub.id;
+                if(id == subId){
+                    resArray.push(sub);
+                }
+            }
+        }
+        if(resArray.length > 0){
+            item["children"]=resArray;
+            return item;
+        }
+        return null;
+    }
+
+
+    //expect [112908188, 13, 8, 4]
+    let idss=["11140621","112908278"]
+    let result=[]
+    for (let item of idss){
+        var ids =[]
+        var items = JSON.parse(JSON.stringify(tree[0]));
+        findFatherId(item,items,ids);
+        result.push(...ids)
+    }
+    result=[...new Set(result)]
+    console.log(result)
+</script>
+</body>
 </html>

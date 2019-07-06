@@ -32,9 +32,6 @@ class StaticCall{
     }
 }
 
-const s1=new StaticCall();
-console.log(s1.getStatic());
-console.log(StaticCall.getStatic());
 
 function debounce1(func,wait=50){
     let timer=0;
@@ -76,3 +73,17 @@ function debounce2(func,wait=50,immediate=true){
         }
     }
 }
+
+// class Greet {
+//     #name = 'World';
+//     get name() {
+//       return this.#name;
+//     }
+//     set name(name) {
+//       this.#name = name;
+//     }
+//     sayHello() {
+//       console.log(`Hello, ${this.#name}`);
+//     }
+//  }
+  
