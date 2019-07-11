@@ -44,3 +44,22 @@ function greeter(person: Person) {
 let user = new Student('jack', 'M.', 'john')
 let b:string='ss'
 console.log(greeter(user))
+let list: number[]=[1,3]
+let list1: Array<number>=[2,3]
+const tuple: [number,string]=[23,'str']
+enum Color{
+  Red=1,
+  Green=2
+}
+function sayName(name:string): string{
+  console.log(name);
+  return name
+}
+interface Name{
+  name?:string;
+  readonly firstName:string;
+}
+type Names={
+  name:string
+}
+type User=Names & {age:number}
