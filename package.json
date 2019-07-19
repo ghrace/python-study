@@ -1,19 +1,20 @@
 {
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon app.js"
-    },
-    "dependencies": {
-        "axios": "^0.18.0",
-        "compression": "^1.7.4",
-        "express": "^4.16.4",
-        "ghr-util": "^1.0.5",
-        "jsonwebtoken": "^8.5.1",
-        "lodash": "^4.17.11",
-        "mongoose": "^5.2.18",
-        "request": "^2.88.0",
-        "request-promise": "^4.2.4",
-        "socket.io": "^2.2.0",
-        "ws": "^7.0.0"
-    }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "compression": "^1.7.4",
+    "express": "^4.16.4",
+    "ghr-util": "^1.0.5",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.2.18",
+    "puppeteer": "^1.18.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "socket.io": "^2.2.0",
+    "ws": "^7.0.0"
+  }
 }
