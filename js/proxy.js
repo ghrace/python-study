@@ -42,3 +42,13 @@ api.get({
 }, (xhr) => {
     alert('Fail');
 });
+
+/**
+ * 
+ * @param {*} tgt 
+ * @param {string} type 
+ */
+function DataType(tgt, type) {
+    const dataType = Object.prototype.toString.call(tgt).replace(/\[object /g, "").replace(/\]/g, "").toLowerCase();
+    return type ? dataType === type : dataType;
+}
