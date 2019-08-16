@@ -170,3 +170,36 @@ parent.say() // father: 你打篮球的样子像kunkun
 
 var child = new Child('cxk', 'father');
 child.say() // father好，我是练习时长两年半的cxk
+
+// 简易理解
+
+// 原型式继承
+child.prototype = Parent.prototype
+child.prototype.constructor = child
+
+// 原型链继承
+child.prototype = new Parent()
+child.prototype.constructor = child
+
+// 构造器继承
+function boyChild (...arg) { Parent.apply(this, arg) }
+
+// 组合继承
+function boyChild (...arg) { Parent.apply(this, arg) }
+boyChild.prototype = new Parent()
+child.prototype.constructor = child
+
+// 寄生组合继承
+
+function child (...arg) { Parent.apply(this, arg) }
+// ${1}
+(
+  function () { 
+    function transmit () {};
+    transmit.prototype = parent.prototype
+    child.prototype = new prototype()
+    child.prototype.constructor = child
+  }
+)()
+// ${2}
+child.prototype = Object.create(parent.prototype)
