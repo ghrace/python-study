@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>单标签！纯CSS实现动态晴阴雨雪</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="weather sunny"></div>
     <div class="weather cloudy"></div>
     <div class="weather rainy"></div>
     <div class="weather snowy"></div>
+    <p id="hostEl"></p>
+    <script>
+      const el = document.querySelector('#hostEl')
+      const shadow = el.attachShadow({ mode: 'open' })
+      shadow.innerHTML = '<span> hide text </span>'
+      shadow.innerHTML = '<style>span{color:red;}</style>'
+    </script>
     <!-- <h2>this 使用</h2>
     <p>this 在函数调用中是一个全局对象</p>
     <p>this 在严格模式下的函数调用中为 undefined</p>
@@ -18,40 +25,40 @@
     <p>在隐式调用.call()或.apply()中，this是第一个参数</p>
     <p>在调用绑定函数时，this是.bind()的第一个参数。</p>
     <p>this 定义箭头函数的封闭上下文,从定义它的外部函数中获取 this</p> -->
-</body>
-<style>
-.weather {
-    position: relative;
-    display: inline-block;
-    width: 180px;
-    height: 240px;
-    background: #23b7e5;
-    border-radius: 8px;
-}
-.sunny:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: #F6D963;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #ff0;
-    z-index: 2;
-}
-.sunny:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -45px 0 0 -45px; 
-    width: 90px;
-    height: 90px;
-    background: #FFEB3B;
-    clip-path: polygon(
-    	50% 0%,
+  </body>
+  <style>
+    .weather {
+      position: relative;
+      display: inline-block;
+      width: 180px;
+      height: 240px;
+      background: #23b7e5;
+      border-radius: 8px;
+    }
+    .sunny:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: #f6d963;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ff0;
+      z-index: 2;
+    }
+    .sunny:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -45px 0 0 -45px;
+      width: 90px;
+      height: 90px;
+      background: #ffeb3b;
+      clip-path: polygon(
+        50% 0%,
         65.43% 25%,
         93.3% 25%,
         78.87% 50%,
@@ -62,148 +69,274 @@
         6.7% 75%,
         21.13% 50%,
         6.7% 25%,
-        35.57% 25%);
-    z-index: 1;
-    animation: sunScale 2s linear infinite;
-}
-@keyframes sunScale {
-    0% {
+        35.57% 25%
+      );
+      z-index: 1;
+      animation: sunScale 2s linear infinite;
+    }
+    @keyframes sunScale {
+      0% {
         transform: scale(1);
-    }
-    50% {
-    	transform: scale(1.1);
-    }
-    100% {
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
         transform: scale(1);
+      }
     }
-}
-.cloudy:before,
-.rainy:before,
-.snowy:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    width: 36px;
-    height: 36px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 
-    	#fff 22px -15px 0 6px,
-    	#fff 57px -6px 0 2px, 
-    	#fff 87px 4px 0 -4px,
-    	#fff 33px 6px 0 6px,
-    	#fff 61px 6px 0 2px,
-    	#ccc 29px -23px 0 6px,
-    	#ccc 64px -14px 0 2px,
-    	#ccc 94px -4px 0 -4px;
-    z-index: 2;
-}
-.cloudy:before {
-    animation: cloudMove 2s linear infinite;
-}
-@keyframes cloudMove {
-    0% {
+    .cloudy:before,
+    .rainy:before,
+    .snowy:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+      width: 36px;
+      height: 36px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: #fff 22px -15px 0 6px, #fff 57px -6px 0 2px,
+        #fff 87px 4px 0 -4px, #fff 33px 6px 0 6px, #fff 61px 6px 0 2px,
+        #ccc 29px -23px 0 6px, #ccc 64px -14px 0 2px, #ccc 94px -4px 0 -4px;
+      z-index: 2;
+    }
+    .cloudy:before {
+      animation: cloudMove 2s linear infinite;
+    }
+    @keyframes cloudMove {
+      0% {
         transform: translate(-50%, -50%);
-    }
-    50% {
+      }
+      50% {
         transform: translate(-50%, -60%);
-    }
-    100% {
+      }
+      100% {
         transform: translate(-50%, -50%);
+      }
     }
-}
-.rainy:after {
-	content: "";
-    position: absolute;
-    top:50%;
-    left: 25%;
-    width: 4px;
-    height: 14px;
-    background: #fff;
-    border-radius: 2px;
-    box-shadow:
-    	#fff 25px -10px 0,
-    	#fff 50px 0 0,
-    	#fff 75px -10px 0,
-    	#fff 0 25px 0,
-    	#fff 25px 15px 0,
-    	#fff 50px 25px 0,
-    	#fff 75px 15px 0,
-    	#fff 0 50px 0,
-    	#fff 25px 40px 0,
-    	#fff 50px 50px 0,
-    	#fff 75px 40px 0;
-    animation: rainDrop 2s linear infinite;	
-}
-@keyframes rainDrop {
-    0% {
+    .rainy:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      width: 4px;
+      height: 14px;
+      background: #fff;
+      border-radius: 2px;
+      box-shadow: #fff 25px -10px 0, #fff 50px 0 0, #fff 75px -10px 0,
+        #fff 0 25px 0, #fff 25px 15px 0, #fff 50px 25px 0, #fff 75px 15px 0,
+        #fff 0 50px 0, #fff 25px 40px 0, #fff 50px 50px 0, #fff 75px 40px 0;
+      animation: rainDrop 2s linear infinite;
+    }
+    @keyframes rainDrop {
+      0% {
         transform: translate(0, 0) rotate(10deg);
-    }
-    100% {
+      }
+      100% {
         transform: translate(-4px, 24px) rotate(10deg);
-        box-shadow:
-        #fff 25px -10px 0,
-        #fff 50px 0 0,
-        #fff 75px -10px 0,
-        #fff 0 25px 0,
-        #fff 25px 15px 0,
-        #fff 50px 25px 0,
-        #fff 75px 15px 0,
-        rgba(255, 255, 255, 0) 0 50px 0,
-        rgba(255, 255, 255, 0) 25px 40px 0,
-        rgba(255, 255, 255, 0) 50px 50px 0,
-        rgba(255, 255, 255, 0) 75px 40px 0;
+        box-shadow: #fff 25px -10px 0, #fff 50px 0 0, #fff 75px -10px 0,
+          #fff 0 25px 0, #fff 25px 15px 0, #fff 50px 25px 0, #fff 75px 15px 0,
+          rgba(255, 255, 255, 0) 0 50px 0, rgba(255, 255, 255, 0) 25px 40px 0,
+          rgba(255, 255, 255, 0) 50px 50px 0, rgba(255, 255, 255, 0) 75px 40px 0;
+      }
     }
-}
-.snowy:after {
-    content: "";
-    position: absolute;
-    top:50%;
-    left: 25%;
-    width: 8px;
-    height: 8px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow:
-        #fff 25px -10px 0,
-        #fff 50px 0 0,
-        #fff 75px -10px 0,
-        #fff 0 25px 0,
-        #fff 25px 15px 0,
-        #fff 50px 25px 0,
-        #fff 75px 15px 0,
-        #fff 0 50px 0,
-        #fff 25px 40px 0,
-        #fff 50px 50px 0,
-        #fff 75px 40px 0;
-    animation: snowDrop 2s linear infinite; 
-}
-@keyframes snowDrop {
-    0% {
+    .snowy:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: #fff 25px -10px 0, #fff 50px 0 0, #fff 75px -10px 0,
+        #fff 0 25px 0, #fff 25px 15px 0, #fff 50px 25px 0, #fff 75px 15px 0,
+        #fff 0 50px 0, #fff 25px 40px 0, #fff 50px 50px 0, #fff 75px 40px 0;
+      animation: snowDrop 2s linear infinite;
+    }
+    @keyframes snowDrop {
+      0% {
         transform: translateY(0);
-    }
-    100% {
+      }
+      100% {
         transform: translateY(25px);
-        box-shadow:
-        #fff 25px -10px 0,
-        #fff 50px 0 0,
-        #fff 75px -10px 0,
-        #fff 0 25px 0,
-        #fff 25px 15px 0,
-        #fff 50px 25px 0,
-        #fff 75px 15px 0,
-        rgba(255, 255, 255, 0) 0 50px 0,
-        rgba(255, 255, 255, 0) 25px 40px 0,
-        rgba(255, 255, 255, 0) 50px 50px 0,
-        rgba(255, 255, 255, 0) 75px 40px 0;
+        box-shadow: #fff 25px -10px 0, #fff 50px 0 0, #fff 75px -10px 0,
+          #fff 0 25px 0, #fff 25px 15px 0, #fff 50px 25px 0, #fff 75px 15px 0,
+          rgba(255, 255, 255, 0) 0 50px 0, rgba(255, 255, 255, 0) 25px 40px 0,
+          rgba(255, 255, 255, 0) 50px 50px 0, rgba(255, 255, 255, 0) 75px 40px 0;
+      }
     }
-}
-</style>
-<script type="module" src="./test.js"></script>
-<script>
-    const p=new Point(1,2)
-    p.toSring()
-</script>
+  </style>
+  <script>
+    //可继续遍历数据类型
+    const mapTag = '[object Map]'
+    const setTag = '[object Set]'
+    const arrayTag = '[object Array]'
+    const objectTag = '[object Object]'
+    const argsTag = '[object Arguments]'
+
+    const boolTag = '[object Boolean]'
+    const dateTag = '[object Date]'
+    const errorTag = '[object Error]'
+    const numberTag = '[object Number]'
+    const regexpTag = '[object RegExp]'
+    const stringTag = '[object String]'
+    const symbolTag = '[object Symbol]'
+    const funcTag = '[object Function]'
+
+    const deepTag = [mapTag, setTag, arrayTag, objectTag, argsTag]
+
+    function forEach(arr, fn) {
+      let index = -1
+      const length = arr.length
+      while (++index < length) {
+        fn(arr[index], index)
+      }
+      return arr
+    }
+    function isObject(target) {
+      const type = typeof target
+      return target !== null && (type === 'object' || type === 'function')
+    }
+
+    function getType(target) {
+      return Object.prototype.toString.call(target)
+    }
+    function getInit(target) {
+      const Ctor = target.constructor
+      return new Ctor()
+    }
+    function cloneSymbol(target) {
+      return Object(Symbol.prototype.valueOf.call(target))
+    }
+    function cloneReg(target) {
+      const reFlags = /\w*$/
+      const res = new target.constructor(target.source, reFlags.exec(target))
+      res.lastIndex = target.lastIndex
+      return res
+    }
+    function cloneFunc(func) {
+      const bodyReg = /(?<={)(.|\n)+(?=})/m
+      const paramReg = /(?<=\().+(?=\)\s+{)/
+      const funcString = func.toString()
+      if (func.prototype) {
+        console.log('普通函数')
+        const param = paramReg.exec(funcString)
+        const body = bodyReg.exec(funcString)
+        if (body) {
+          console.log('匹配到函数体：', body[0])
+          if (param) {
+            const paramArr = param[0].split(',')
+            console.log('匹配到参数：', paramArr)
+            return new Function(...paramArr, body[0])
+          } else {
+            return new Function(body[0])
+          }
+        } else {
+          return null
+        }
+      } else {
+        return eval(funcString)
+      }
+    }
+    function cloneOtherType(target, type) {
+      const Ctor = target.constructor
+      switch (type) {
+        case boolTag:
+        case numberTag:
+        case stringTag:
+        case errorTag:
+        case dateTag:
+          return new Ctor(target)
+        case regexpTag:
+          return cloneReg(target)
+        case symbolTag:
+          return cloneSymbol(target)
+        case funcTag:
+          return cloneFunc(target)
+        default:
+          return null
+      }
+    }
+
+    function clone(target, map = new WeakMap()) {
+      //原始类型
+      if (!isObject(target)) {
+        return target
+      }
+      //初始化
+      const type = getType(target)
+      let result
+      if (deepTag.includes(type)) {
+        result = getInit(target, type)
+      } else {
+        return cloneOtherType(target, type)
+      }
+      //处理循环引用
+      if (map.get(target)) {
+        return target
+      }
+      map.set(target, result)
+      //set,map
+      if (type === setTag) {
+        target.forEach(val => {
+          result.add(clone(val))
+        })
+        return result
+      }
+      if (type === mapTag) {
+        target.forEach((val, k) => {
+          result.set(k, clone(val))
+        })
+        return result
+      }
+      //obj,arr
+      const keys = type === arrayTag ? undefined : Object.keys(target)
+      forEach(keys || target, (val, key) => {
+        if (keys) {
+          key = val
+        }
+        result[key] = clone(target[key], map)
+      })
+      return result
+    }
+  </script>
+  <script>
+    const map = new Map()
+    map.set('key', 'value')
+    map.set('ConardLi', 'code秘密花园')
+
+    const set = new Set()
+    set.add('ConardLi')
+    set.add('code秘密花园')
+
+    const target = {
+      field1: 1,
+      field2: undefined,
+      field3: {
+        child: 'child'
+      },
+      field4: [2, 4, 8],
+      empty: null,
+      map,
+      set,
+      bool: new Boolean(true),
+      num: new Number(2),
+      str: new String(2),
+      symbol: Object(Symbol(1)),
+      date: new Date(),
+      reg: /\d+/,
+      error: new Error(),
+      func1: () => {
+        console.log('code秘密花园')
+      },
+      func2: function(a, b) {
+        return a + b
+      }
+    }
+    let cloned=clone(target)
+    console.log(cloned)
+  </script>
 </html>
