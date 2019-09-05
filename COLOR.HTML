@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-        .father {
-            color: red
-        }
-
-        .father .son {
-            color: green
-        }
-
-        .son {
-            color: inherit !important
-        }
-
-        .angle {
-            width: 0;
-            height: 0;
-            border-bottom: 100px solid cyan;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-        }
+      .father {
+        color: red;
+      }
+      .father .son {
+        color: green;
+      }
+      .son {
+        color: inherit !important;
+      }
+      .angle {
+        width: 0;
+        height: 0;
+        border-bottom: 100px solid cyan;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+      }
+      .green {
+        color: green;
+      }
+    .red {
+    color: red;
+    }
+      .blue {
+        color: blue;
+      }
+      .a{
+          color: red;
+      }
+      .b{
+          color: green;
+      }
+      .a.b{
+          color: yellow;
+      }
+      .b.a{
+          color: gray
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+      <span class="a b">这是什么颜色</span>
+      <div>
+          <p>
+              1. 如果使用多个class去描述元素，css样式的优先级和使用时候的位置无关，只与声明的位置有关，比如class="a1 a2"和class="a2 a1"是等价的。
+          </p>
+          <p>
+              2. css样式的优先级是在加载css文件的时候就确定下来的，而且是后来居上（后声明的样式优先级高）
+          </p>
+      </div>
+    <div class="red blue">这是什么颜色</div>
+    <div class="blue red">这是什么颜色</div>
+    <div class="blue green red">这是什么颜色</div>
     <div class="father">
-        <div class="son">content</div>
+      <div class="son">content</div>
     </div>
-    <div class="angle">
-    </div>
-</body>
-
+    <div class="angle"></div>
+  </body>
 </html>

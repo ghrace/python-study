@@ -12,17 +12,17 @@
     <div class="item active">222</div>
     <div class="item">2233</div>
     <script>
-      let items = $(".item");
-      let hasActive
-      for(let i=0,len=items.length;i<len;i++){
-          const item=$(items[i])
-          if(item.hasClass('active')){
-            hasActive=true;
-            break
-          }
-          hasActive=false
-      }
-      console.log(hasActive);
+      // let items = $(".item");
+      // let hasActive
+      // for(let i=0,len=items.length;i<len;i++){
+      //     const item=$(items[i])
+      //     if(item.hasClass('active')){
+      //       hasActive=true;
+      //       break
+      //     }
+      //     hasActive=false
+      // }
+      // console.log(hasActive);
       // items = Array.from(items);
       // let hasActive = items.some(item => {
       //   return $(item).hasClass("active");
@@ -31,6 +31,41 @@
       // if (!hasActive) {
       //   console.log("choose one");
       // }
+      function createRandom(num, from, to) {
+        let arr = Array(num);
+        for (let i = from; i <= to; i++){
+          arr[i]=i
+        }
+        arr.sort(function () {
+            return 0.5 - Math.random();
+        });
+        return arr;
+    }
+      const arr = createRandom(100, 0, 100)
+      console.log(arr)
+      const length=arr.length;
+      let sum =0
+        console.time('while')
+        let i=0;
+        while(i<length){
+          sum+=arr[i];
+          i++
+        }
+
+        console.timeEnd('while')
+        sum=0
+        console.time('in')
+        for(let k in arr){
+          sum+=arr[k]
+        }
+
+        console.timeEnd('in')
+        sum=0
+        console.time('for')
+        for(let j=0;j<length;j++){
+          sum+=arr[j]
+        }
+        console.timeEnd('for')
     </script>
   </body>
 </html>

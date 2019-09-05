@@ -14,7 +14,7 @@ function createRandom(num, from, to) {
     arr.length = num;
     return arr;
 }
-const arr = createRandom(10000, 0, 10000)
+const arr = createRandom(20000, 0, 20000)
 
 function checkArray(arr) {
     if (!arr || arr.length <= 2) return
@@ -29,7 +29,25 @@ function swap(array, left, right) {
 // function swap(arr, n1, n2) {
 //   [arr[n1], arr[n2]] = [arr[n2], arr[n1]]
 // }
-//冒泡
+//冒泡 优化
+//当某次冒泡操作已经没有数据交换时，说明已经达到完全有序，不用再继续执行后续的冒泡操作
+const bubbleSort2 = arr => {
+	const length = arr.length;
+    checkArray(arr);
+	// i < length - 1 是因为外层只需要 length-1 次就排好了，第 length 次比较是多余的。
+	for (let i = 0; i < length - 1; i++) {
+		let hasChange = false; // 提前退出冒泡循环的标志位
+		// j < length - i - 1 是因为内层的 length-i-1 到 length-1 的位置已经排好了，不需要再比较一次。
+		for (let j = 0; j < length - i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+                swap(arr, j, j + 1)
+				hasChange = true; // 表示有数据交换
+			}
+		}
+		if (!hasChange) break; // 如果 false 说明所有元素已经到位，没有数据交换，提前退出
+    }
+    return arr
+};
 function bubble(array) {
     checkArray(array);
     for (let i = array.length - 1; i > 0; i--) {
@@ -41,7 +59,9 @@ function bubble(array) {
     return array;
 }
 console.time('bubble')
-const bub = bubble(arr)
+//bubble
+// const bub = bubble(arr)
+const bub = bubbleSort2(arr)
 //console.log(bub);
 console.timeEnd('bubble')
 //插入
@@ -120,6 +140,57 @@ function quisort(array) {
     quickSort(array, 0, array.length - 1);
     return array;
 }
+//快排1 
+const quickSort1 = arr => {
+	if (arr.length <= 1) {
+		return arr;
+	}
+	//取基准点
+	const midIndex = Math.floor(arr.length / 2);
+	//取基准点的值，splice(index,1) 则返回的是含有被删除的元素的数组。
+	const valArr = arr.splice(midIndex, 1);
+	const midIndexVal = valArr[0];
+	const left = []; //存放比基准点小的数组
+	const right = []; //存放比基准点大的数组
+	//遍历数组，进行判断分配
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] < midIndexVal) {
+			left.push(arr[i]); //比基准点小的放在左边数组
+		} else {
+			right.push(arr[i]); //比基准点大的放在右边数组
+		}
+	}
+	//递归执行以上操作，对左右两个数组进行操作，直到数组长度为 <= 1
+	return quickSort1(left).concat(midIndexVal, quickSort1(right));
+};
+// 快速排序2 比1慢一半
+const quickSort2 = (arr, left, right) => {
+	let len = arr.length,
+		partitionIndex;
+	left = typeof left != 'number' ? 0 : left;
+	right = typeof right != 'number' ? len - 1 : right;
+
+	if (left < right) {
+		partitionIndex = partition(arr, left, right);
+		quickSort(arr, left, partitionIndex - 1);
+		quickSort(arr, partitionIndex + 1, right);
+	}
+	return arr;
+};
+
+const partition = (arr, left, right) => {
+	//分区操作
+	let pivot = left, //设定基准值（pivot）
+		index = pivot + 1;
+	for (let i = index; i <= right; i++) {
+		if (arr[i] < arr[pivot]) {
+			swap(arr, i, index);
+			index++;
+		}
+	}
+	swap(arr, pivot, index - 1);
+	return index - 1;
+};
 
 function quickSort(array, left, right) {
     if (left < right) {
@@ -155,7 +226,7 @@ function part(array, left, right) {
 }
 
 console.time('quicksort')
-const qui = quisort(arr)
+const qui = quickSort1(arr)
 //console.log(qui);
 console.timeEnd('quicksort')
 //堆排序
@@ -252,7 +323,8 @@ check(shell)
 
 
 function check(arr) {
-    for (let i = 0, len = arr.length - 1; i < len; i++) {
+    const len=arr.length-1;
+    for (let i = 0; i < len; i++) {
         if (arr[i + 1] < arr[i]) {
             return console.log(`检查不通过！位置：${i}，值：${arr[i]}, ${arr[i+1]}`)
         }
