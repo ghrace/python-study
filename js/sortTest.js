@@ -4,17 +4,24 @@
 稳定指，如果a=b,a在b的前面，排序后a仍然在b的前面
 不稳定指，如果a=b，a在b的前面，排序后可能会交换位置
 */
-function createRandom(num, from, to) {
+function createRandom(from, to) {
     let arr = [];
-    for (let i = from; i <= to; i++)
+    for (let i = from; i <= to; i++){
         arr.push(i);
+    }
     arr.sort(function () {
         return 0.5 - Math.random();
     });
-    arr.length = num;
     return arr;
 }
-const arr = createRandom(20000, 0, 20000)
+console.time('creatArr')
+const arr = createRandom(0, 10000)
+console.timeEnd('creatArr')
+
+let cloned
+const clone= arr=>{
+    return JSON.parse(JSON.stringify(arr))
+}
 
 function checkArray(arr) {
     if (!arr || arr.length <= 2) return
@@ -58,12 +65,17 @@ function bubble(array) {
     }
     return array;
 }
+cloned=clone(arr)
+
 console.time('bubble')
-//bubble
-// const bub = bubble(arr)
-const bub = bubbleSort2(arr)
-//console.log(bub);
+const bub = bubble(cloned)
 console.timeEnd('bubble')
+
+cloned=clone(arr)
+
+console.time('bubbleBetter')
+const bub2 = bubbleSort2(cloned)
+console.timeEnd('bubbleBetter')
 //插入
 function insertion(array) {
     checkArray(array);
@@ -73,8 +85,10 @@ function insertion(array) {
     }
     return array;
 }
+cloned=clone(arr)
+
 console.time('insert')
-const ins = insertion(arr)
+const ins = insertion(cloned)
 //console.log(ins);
 console.timeEnd('insert')
 //选择
@@ -89,8 +103,11 @@ function selection(array) {
     }
     return array;
 }
+cloned=clone(arr)
+
 console.time('select')
-const sel = selection(arr)
+
+const sel = selection(cloned)
 //console.log(sel);
 console.timeEnd('select')
 //归并
@@ -128,9 +145,10 @@ function mergeSort(array, left, right) {
     }
     return array;
 }
+cloned=clone(arr)
 
 console.time('guibing')
-const gui = guisort(arr)
+const gui = guisort(cloned)
 //console.log(gui);
 console.timeEnd('guibing')
 
@@ -224,9 +242,10 @@ function part(array, left, right) {
     swap(array, right, more);
     return [less, more];
 }
+cloned=clone(arr)
 
 console.time('quicksort')
-const qui = quickSort1(arr)
+const qui = quickSort1(cloned)
 //console.log(qui);
 console.timeEnd('quicksort')
 //堆排序
@@ -279,13 +298,15 @@ function heapify(array, index, size) {
         left = index * 2 + 1;
     }
 }
+cloned=clone(arr)
 
 console.time('heap')
-const dui = heap(arr)
+const dui = heap(cloned)
 console.timeEnd('heap')
+cloned=clone(arr)
 
 console.time('origin')
-const origin = arr.sort((a, b) => a - b)
+const origin = cloned.sort((a, b) => a - b)
 console.timeEnd('origin')
 
 //希尔排序
@@ -308,19 +329,22 @@ function shellSort(arr){
     }
     return arr
 }
+cloned=clone(arr)
+
 console.time('shell')
-const shell = shellSort(arr)
+const shell = shellSort(cloned)
 console.timeEnd('shell')
 
+console.time('check')
 check(qui)
 check(gui)
-check(bub)
+check(bub2)
 check(sel)
 check(ins)
 check(dui)
 check(origin)
 check(shell)
-
+console.timeEnd('check')
 
 function check(arr) {
     const len=arr.length-1;

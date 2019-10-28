@@ -175,7 +175,7 @@ BeterPromise.prototype.then = function(onFulfilled, onRejected) {
 }
 
 
-PromisePolyfill.all = function (promises) {
+BeterPromise.all = function (promises) {
   return new Promise((resolve, reject) => {
     const result = []
     let cnt = 0
@@ -189,7 +189,7 @@ PromisePolyfill.all = function (promises) {
   })
 }
 
-PromisePolyfill.race = function (promises) {
+BeterPromise.race = function (promises) {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < promises.length; ++i) {
       promises[i].then(resolve, reject)
