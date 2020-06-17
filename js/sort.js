@@ -166,3 +166,15 @@ const quiregaiSort = function quiregaiSort(source, start, end) {
     return source
 }
 //JS 数组长度大于 10 采用快排，否则插入排序
+
+const sdts = [
+    {name:"小明",age:12},
+    {name:"小红",age:13},
+    {name:"小花",age:11}
+]
+function compare(key){
+    return function (a,b){
+        return a[key]-b[key]
+    }
+}
+sdts.sort(compare('age'))

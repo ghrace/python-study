@@ -7,6 +7,7 @@ package-lock.json
 .idea
 .vscode
 /js/imgs/
+/py/img/
 qb.txt
 node_modules/
 /__pycache__/

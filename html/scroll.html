@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .row {
+        display: flex;
+    }
+
+    .box {
+        width: 200px;
+        height: 300px;
+        margin-right: 30px;
+        overflow-y: scroll;
+        margin-top: 20px;
+    }
+
+    .img {
+        flex: 1;
+    }
+
+    .save {
+        width: 80px;
+        height: 36px;
+        background-color: lightsalmon;
+        margin: 50px 200px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="row">
+        <div class="box">
+            <p>上面的代码调用了asyncReadFile函数，然后它就会自动执行，输出最后结果。这完全不像 Generator 函数，需要调用next方法，或者用co模块，才能真正执行，得到最后结果。
+
+                （2）更好的语义。
+
+                async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。
+
+                （3）更广的适用性。
+
+                co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即
+                resolved 的 Promise 对象）。
+
+                （4）返回值是 Promise。
+
+                async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。
+
+                进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖。</p>
+        </div>
+        <div class="img">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    <button id="rotate" class="save">旋转保存</button>
+</body>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0, 250, 150);
+        ctx.stroke();
+    }
+    img.src = 'ninja.jpg'
+
+    function rotate(img) {
+        const angle = 90 * Math.PI / 180;
+        canvas.width = img.height / 2;
+        canvas.height = img.width / 2;
+        ctx.rotate(angle);
+        ctx.drawImage(img, 0, -img.height / 2, img.width / 2, img.height / 2)
+    }
+    function download() {
+        let url = canvas.toDataURL('image/jpg')
+        let a = document.createElement('a')
+        let event = new MouseEvent('click')
+        a.download = 'ninja'
+        a.href = url
+        a.dispatchEvent(event)
+    }
+    const btn = document.getElementById('rotate')
+    btn.addEventListener('click', function () {
+        rotate(img)
+        // download()
+    })
+</script>
+
+</html>
