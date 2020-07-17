@@ -1,15 +1,15 @@
 function create() {
     let obj = new Object()
     //构造函数
+    console.log(arguments)
     let con = [].shift.call(arguments)
-
+    console.log(con)
     obj.__proto__ = con.prototype
 
     let result = con.apply(obj, arguments)
 
     return typeof result === 'object' ? result : obj
 }
-
 function instan(left, right) {
     let prototype = right.prototype
     left = left.__proto__
@@ -25,7 +25,7 @@ function instan(left, right) {
 }
 
 Function.prototype.myCall = function (ctx) {
-    let ctx = ctx || window;
+    ctx = ctx || window;
     ctx.fn = this;
     let args = [...arguments].slice(1)
     let result = ctx.fn(...args)
@@ -34,7 +34,7 @@ Function.prototype.myCall = function (ctx) {
 }
 
 Function.prototype.myApply = function (ctx) {
-    let ctx = ctx || window
+    ctx = ctx || window
     ctx.fn = this
     let result
     if (arguments[1]) {
