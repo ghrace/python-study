@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function Fibonacci(n) {
+                if (n <= 1) {
+                    return 1
+                }
+
+                return Fibonacci(n - 1) + Fibonacci(n - 2)
+            }
+            //尾递归优化
+            function Fibonacci2(n, ac1 = 1, ac2 = 1) {
+                if (n <= 1) {
+                    return ac2
+                }
+
+                return Fibonacci2(n - 1, ac2, ac1 + ac2)
+            }
+            // console.log(Fibonacci2(20))
+            //动态规划
+            function Fibonacci3(n) {
+                let dp = [0, 1, 1]
+                for (let i = 3; i <= n; i++) {
+                    dp[i] = dp[i - 1] + dp[i - 2]
+                }
+                return dp[n]
+            }
+            // console.log(Fibonacci3(15))
+
+            const climbStairs = function (n) {
+                let dp = [0, 1, 2]
+
+                for (let i = 3; i <= n; i++) {
+                    dp[i] = dp[i - 1] + dp[i - 2]
+                    console.log(dp)
+                }
+                return dp[n]
+            }
+            // climbStairs(23)
+
+            /*
+                记录【今天之前买入的最小值】
+                计算【今天之前最小值买入，今天卖出的获利】，也即【今天卖出的最大获利】
+                比较【每天的最大获利】，取最大值即可
+                */
+            const maxProfit = (prices) => {
+                if (prices.length <= 1) {
+                    return 0
+                }
+                let min = prices[0],
+                    max = 0
+                for (let i = 1; i < prices.length; i++) {
+                    max = Math.max(max, prices[i] - min)
+                    min = Math.min(min, prices[i])
+                }
+                return max
+            }
+            maxProfit([7, 1, 5, 3, 6, 4])
+
+            //穷举法的程序框架一般为
+            //     cnt=0;                                   // 解的个数初值为0
+            // for(k=<区间下限>；k<=<区间上限>；k++)          // 根据指定范围实施穷举
+            //   if (<约束条件>)                         // 根据约束条件实施筛选
+            //   {
+            //       cout<<(<满足要求的解>);              // 输出满足要求的解
+            //       cnt++;                            // 统计解的个数
+            //   }
+            //   }
+            function countPrimes(n) {
+                if (n < 3) return 0
+                let notPrim = Array(n)
+                let count = 0
+                for (let i = 2; i < n; i++) {
+                    if (!notPrim[i]) {
+                        count++
+                        for (let j = i + i; j < n; j += i) {
+                            notPrim[j] = true
+                        }
+                        // for (let j = 2; j * i < n; j++) {
+                        //     notPrim[j * i] = true
+                        // }
+                    }
+                }
+                return count
+            }
+            const maximalSquare = function (matrix) {
+                let len = matrix.length
+                if (len < 1) return 0
+
+                let n = matrix[0].length
+                let max = 0
+                let dp = Array(len + 1).fill(Array(n + 1).fill(0))
+                for (let i = 1; i <len; i++) {
+                    for (let j = 1; j < n; j++) {
+                        if (matrix[i - 1][j - 1] == '1') {
+                          console.log(11)
+                            dp[i][j] =
+                                1 +
+                                Math.min(
+                                    dp[i - 1][j - 1],
+                                    dp[i - 1][j], dp[i][j - 1]
+                                )
+                                console.log(dp)
+                            max = Math.max(max, dp[i][j])
+                            console.log(max)
+                        }
+                    }
+                }
+                return max * max
+            }
+            // maximalSquare([["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]])
+            maximalSquare([['1']])
+        </script>
+    </body>
+</html>

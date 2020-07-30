@@ -211,3 +211,135 @@ function resolutionProcedure(promise2, x, resolve, reject) {
         resolve(x)
     }
 }
+
+function curry(fn,...args){
+    // 如果传递的参数还没有达到要执行的函数fn的个数
+    // 就继续返回新的函数(高阶函数)
+    // 并且返回curry函数传递剩下的参数
+  if(args.length<fn.length){
+    return (...newArgs)=>curry(fn,...args,...newArgs)
+  }else{
+    return fn(...args)
+  }
+}
+
+// 我们以ES6类的形式写出来
+class EventEmitter {
+  constructor() {
+      // 事件对象，存储订阅的type类型
+      this.events = Object.create(null);
+  }
+  on(type, cb) {
+      let events = this.events;
+      // 如果该type类型存在，就继续向数组中添加回调cb
+      if (events[type]) {
+          events[type].push(cb);
+      } else {
+          // type类型第一次存入的话，就创建一个数组空间并存入回调cb
+          event[type] = [cb];
+      }
+  }
+  emit(type, ...args) {
+      // 遍历对应type订阅的数组，全部执行
+      if (this.events[type]) {
+          this.events[type].forEach(listener => {
+              listener.call(this, ...args);
+          });   
+      }
+  }
+  off(type, cb) {
+      let events = this.events;
+      if (events[type]) {
+          events[type] = events[type].filter(listener => {
+              // 过滤用不到的回调cb
+              return listener !== cb && listener.listen !== cb;
+          });
+      }
+  }
+  once(type, cb) {
+      function wrap() {
+          cb(...arguments);
+          this.off(type, wrap);
+      }
+      // 先绑定，调用后删除
+      wrap.listen = cb;
+      // 直接调用on方法
+      this.on(type, wrap);
+  }
+}
+
+
+const jsonp = (opts = {}) => {
+  // 通过一个callback参数所对应的函数名来把数据进行写入
+  opts.url = `${opts.url}?callback=${opts.callback}`;
+  // 在你需要传递其他参数时，需要遍历后拼接到url上
+  for (let key in opts.data) {
+      if (opts.data.hasOwnProperty(key)) {
+          opts.url += `&${key}=${opts.data[key]}`;
+      }
+  }
+  // 主要是依靠script的src属性加载内容没有跨域情况
+  const script = document.createElement('script');
+  script.src = opts.url;
+  // 在script脚本执行完毕后，再删除此脚本
+  script.onload = () => {
+      document.body.removeChild(script);
+  }
+  // 把创建好的script脚本添加到body中
+  document.body.appendChild(script);
+};
+//缓存函数抽象为高阶函数
+function memoize(fn) {
+  let isCalculated = false;
+  let lastResult;
+  return function memoizedFn() {
+    // Return the generated function!
+    if (isCalculated) {
+      return lastResult;
+    }
+    let result = fn();
+    lastResult = result;
+    isCalculated = true;
+    return result;
+  };
+}
+//lodash 缓存
+function memoize(func, resolver) {
+  if (
+    typeof func != "function" ||
+    (resolver != null && typeof resolver != "function")
+  ) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function () {
+    var args = arguments,
+      key = resolver ? resolver.apply(this, args) : args[0],
+      cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache)();
+  return memoized;
+}
+// 给定10进制数，转换成[2~16]进制区间数
+function Conver(number, base = 2) {
+  let rem, res = '', digits = '0123456789ABCDEF', stack = [];
+
+  while (number) {
+    rem = number % base;
+    stack.push(rem);
+
+    number = Math.floor(number / base);
+  }
+
+  while (stack.length) {
+    res += digits[stack.pop()].toString();
+  }
+  
+  return res;
+}

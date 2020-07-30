@@ -6,7 +6,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "compression": "^1.7.4",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "ghr-util": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.11",
